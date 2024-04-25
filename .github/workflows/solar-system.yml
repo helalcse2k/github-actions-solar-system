@@ -5,11 +5,11 @@ on:
   push:
     branches:
       - main
-      - 'feature/*'
+      - feature/*
 env:
   MONGO_URI: mongodb+srv://supercluster.d83jj.mongodb.net/superData
   MONGO_USERNAME: superuser
-  MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}  
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}  
   
 jobs:
     unit-testing:
@@ -31,6 +31,7 @@ jobs:
           run: npm test
           
         - name: Archive Test Result
+          if: always()
           uses: actions/upload-artifact@v3
           with:
             name: Mocha-Test-Result
