@@ -13,6 +13,11 @@ env:
 
 jobs:
     unit-testing:
+        needs: dev-deploy
+        uses: ./.github/workflows/resuable-workflow.yml
+        with:
+          ingress-url: ${{needs.dev-deploy.outputs.APP_INGRESS_URL}}
+        
         name: Unit Testing
         runs-on: ubuntu-latest
         container:
